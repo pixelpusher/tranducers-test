@@ -315,6 +315,43 @@ console.log(`Poly iter:`);
 console.log([...makePolyIter(5, 2)]);
 
 
+//-------------
+
+export function makeFsin() {
+  let t = 0;
+  return (i, x, amt, period) => x + amt * Math.sin(t++ / (period - 1) * Math.PI);
+}
+
+const fsint = makeFsin();
+console.log(`FSINt 1x: ${fsint(0,1,1,8)}`);
+console.log(`FSINt 2x: ${fsint(0,1,1,8)}`);
+console.log(`FSINt 3x: ${fsint(0,1,1,8)}`);
+console.log(`FSINt 4x: ${fsint(0,1,1,8)}`);
+
+const fsint2 = makeFsin();
+console.log(`FSINt 1x: ${fsint2(0,1,1,8)}`);
+console.log(`FSINt 2x: ${fsint2(0,1,1,8)}`);
+console.log(`FSINt 3x: ${fsint2(0,1,1,8)}`);
+console.log(`FSINt 4x: ${fsint2(0,1,1,8)}`);
+
+
+/**
+ * Make periodic linear warp
+ * @returns {Function}
+ */
+export function makeFlint(period) {
+  
+  let t = -1;
+  return (x, amt) => {t = ((t+1) % period); return x + 2*amt * ( t / (period-1) - 0.5)};
+}
+
+const flint = makeFlint(12);
+console.log(`FLINt 1x: ${flint(0,0.25)}`);
+console.log(`FLINt 2x: ${flint(1,0.25)}`);
+console.log(`FLINt 3x: ${flint(2,0.25)}`);
+console.log(`FLINt 3x: ${flint(3,0.25)}`);
+
+
 document.querySelector('#app').innerHTML = `
   <div>
     <a href="https://vitejs.dev" target="_blank">
